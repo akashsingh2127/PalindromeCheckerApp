@@ -1,17 +1,16 @@
 /**
  * ================================================
- * UseCase9PalindromeCheckerApp
+ * UseCase10PalindromeCheckerApp
  * ================================================
  *
- * Use Case 9: Recursive Palindrome Checker
+ * Use Case 10: Case-Insensitive & Space-Ignored Palindrome
  *
  * Goal:
- * - Check palindrome using recursion
+ * - Ignore spaces and case while checking palindrome
  *
  * Concepts:
- * - Recursion
- * - Base condition
- * - Call stack
+ * - String preprocessing
+ * - Regular expressions
  *
  * Author: Developer
  * Version: 1.0
@@ -20,23 +19,28 @@
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
-        String word = "level"; // hardcoded string
+        String word = "A man a plan a canal Panama"; // hardcoded string
 
-        if (isPalindrome(word, 0, word.length() - 1)) {
-            System.out.println("The word '" + word + "' is a palindrome.");
+        // Normalize string: remove spaces & convert to lowercase
+        String normalized = word.replaceAll("\\s+", "").toLowerCase();
+
+        if (isPalindrome(normalized)) {
+            System.out.println("The phrase '" + word + "' is a palindrome.");
         } else {
-            System.out.println("The word '" + word + "' is NOT a palindrome.");
+            System.out.println("The phrase '" + word + "' is NOT a palindrome.");
         }
     }
 
-    // Recursive palindrome check
-    private static boolean isPalindrome(String word, int start, int end) {
-        if (start >= end) {
-            return true; // base condition
+    // Simple palindrome check using two-pointer technique
+    private static boolean isPalindrome(String str) {
+        int start = 0, end = str.length() - 1;
+        while (start < end) {
+            if (str.charAt(start) != str.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
         }
-        if (word.charAt(start) != word.charAt(end)) {
-            return false;
-        }
-        return isPalindrome(word, start + 1, end - 1); // recursive call
+        return true;
     }
 }
