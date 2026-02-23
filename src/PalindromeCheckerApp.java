@@ -1,50 +1,52 @@
 /**
  * ================================================
- * UseCase4PalindromeCheckerApp
+ * UseCase5PalindromeCheckerApp
  * ================================================
  *
- * Use Case 4: Character Array Based Palindrome Check
+ * Use Case 5: Stack-Based Palindrome Checker
  *
  * Goal:
- * - Convert string to char array
- * - Use two-pointer approach to check palindrome
+ * - Use stack to reverse characters and validate palindrome.
  *
  * Flow:
- * - Convert string to char[]
- * - Compare start and end characters
- * - Display result
+ * - Push characters into stack
+ * - Pop and compare with original
+ * - Print result
  *
  * Concepts:
- * - char[] array
- * - Array indexing
- * - Two-pointer technique
- * - Time-efficient comparison
+ * - Stack (LIFO)
+ * - Push and Pop operations
+ * - String comparison
  *
  * Author: Developer
  * Version: 1.0
  */
+
+import java.util.Stack;
+
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
-        String word = "level"; // hardcoded string
+        String word = "deified"; // hardcoded string
 
-        char[] chars = word.toCharArray(); // convert to char array
-        boolean isPalindrome = true;       // flag
+        Stack<Character> stack = new Stack<>();
 
-        int start = 0;
-        int end = chars.length - 1;
+        // Push all characters onto stack
+        for (int i = 0; i < word.length(); i++) {
+            stack.push(word.charAt(i));
+        }
 
-        // Two-pointer comparison
-        while (start < end) {
-            if (chars[start] != chars[end]) {
+        boolean isPalindrome = true;
+
+        // Pop from stack and compare with original
+        for (int i = 0; i < word.length(); i++) {
+            if (word.charAt(i) != stack.pop()) {
                 isPalindrome = false;
                 break;
             }
-            start++;
-            end--;
         }
 
-        // Display result
+        // Print result
         if (isPalindrome) {
             System.out.println("The word '" + word + "' is a palindrome.");
         } else {
